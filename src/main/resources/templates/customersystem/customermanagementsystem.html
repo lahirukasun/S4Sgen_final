@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Customers Management System</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/assets/css/bootstrap-responsive.min.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/matrix-style.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/matrix-media.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/datepicker.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/uniform.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/select2.css}" />
+<link th:href="@{/assets/font-awesome/css/font-awesome.css}"
+	rel="stylesheet" />
+<link
+	th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,700,800}"
+	rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+	<!--Header-part-->
+	<div id="header">
+		<img src="/images/logo.png" width="185" height="" />
+	</div>
+	<!--close-Header-part-->
+
+	<!--top-Header-menu-->
+	<div id="user-nav" class="navbar navbar-inverse">
+		<ul class="nav">
+			<li class="dropdown" id="profile-messages"><a title="" href="#"
+				data-toggle="dropdown" data-target="#profile-messages"
+				class="dropdown-toggle"><i class="icon icon-user"></i> <span
+					class="text">Welcome User</span><b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a th:href="@{/myprofile}"><i class="icon-user"></i> My Profile</a></li>
+					<li class="divider"></li>
+					<li><a th:href="@{/logout}"><i class="icon-key"></i> Log Out</a></li>
+				</ul></li>
+			<li class=""><a title="" th:href="@{/mysettings}"><i class="icon icon-cog"></i>
+					<span class="text">Settings</span></a></li>
+			<li class=""><a title="" th:href="@{/logout}"><i
+					class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+		</ul>
+	</div>
+
+
+	<!--sidebar-menu-->
+
+	<div id="sidebar">
+		<a href="#" class="visible-phone"><i class="icon icon-home"></i>
+			Dashboard2</a>
+		<ul>
+			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
+					<span>Management Systems</span></a>
+				<ul>
+					<li><a th:href="@{/add_manage_customer/1}">Add /update Customers</a></li>
+					<li><a th:href="@{/make_customer_order/2}">Add /update Customer Order</a></li>
+					<li><a th:href="@{/make_order_payment/3}">Add /update Customer Payment</a></li>
+					<li><a th:href="@{/generate_customer_report/4}">Generate Customer Report</a></li>
+				</ul></li>
+		</ul>
+	</div>
+
+	<div id="content">
+
+		<div class="widget-content" id="same-line-div">
+			<p>
+			<h2>Manage Restaurant Customers</h2>
+			</p>
+		</div>
+
+		<div class="container-fluid">
+
+			<div class="widget-title">
+				<ul class="nav nav-tabs">
+					<li class="active"><a data-toggle="tab" href="#tab1">Add
+							/Update Customers</a></li>
+					<li><a data-toggle="tab" href="#tab2">View Registered Customers</a></li>
+				</ul>
+			</div>
+
+			<div class="widget-content tab-content">
+
+				<div id="tab1" class="tab-pane active">
+					<form class="form-horizontal" method="post" th:action="@{/add_customer}" th:object="${customer}"
+						name="basic_validate" id="basic_validate" novalidate="novalidate">
+						<input type="hidden" th:field="*{id}" />
+						<div class="control-group">
+							<label class="control-label">Customer Name</label>
+							<div class="controls">
+								<input type="text" name="required" id="required" th:field="*{name}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Customer Mobile</label>
+							<div class="controls">
+								<input type="text" name="required" id="required" th:field="*{mobile}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Customer Membership Id</label>
+							<div class="controls">
+								<input type="text" name="number" id="number" th:field="*{membershipId}"/>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Select Membership type</label>
+							<div class="controls">
+								<select th:field="*{membershipType}">
+									<option th:each="t : ${types}" th:text="${t}" th:value="${t}">CS101</option>
+								</select>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Joining Date</label>
+							<div class="controls">
+								<input type="text" name="date" id="date" th:field="*{joinDate}"/>
+							</div>
+						</div>
+						<div class="form-actions">
+							<input type="submit" value="Add" class="btn btn-success"
+								style="margin-left: 350px;" />
+						</div>
+					</form>
+				</div>
+
+				<div id="tab2" class="tab-pane">
+					<div class="widget-title">
+						<span class="icon"><i class="icon-th"></i></span>
+						<h5>Registered Customers</h5>
+					</div>
+					<table class="table table-bordered data-table">
+						<thead>
+							<tr>
+								<th>Customer Name</th>
+								<th>Mobile</th>
+								<th>Membership Id</th>
+								<th>Membership type</th>
+								<th>Joining Date</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="cus : ${customers}">
+								<td th:text="${cus.name}">1234</td>
+								<td th:text="${cus.mobile}">Talha</td>
+								<td th:text="${cus.membershipId}">313741922</td>
+								<td th:text="${cus.membershipType}">CS101</td>
+								<td th:text="${cus.joinDate}">02-02-2017</td>
+								<td class="center">
+									<a th:href="@{'/edit_customer/' + ${cus.id}}" class="btn btn-primary btn-mini">Edit</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script th:src="@{/assets/js/jquery.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.ui.custom.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.uniform.js}"></script>
+	<script th:src="@{/assets/js/jquery.validate.js}"></script>
+	<script th:src="@{/assets/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/assets/js/matrix.js}"></script>
+	<script th:src="@{/assets/js/matrix.form_common.js}"></script>
+	<script th:src="@{/assets/js/matrix.tables.js}"></script>
+
+</body>
+</html>

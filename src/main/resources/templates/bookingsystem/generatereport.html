@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Tickets Management System</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/assets/css/bootstrap-responsive.min.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/matrix-style.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/matrix-media.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/datepicker.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/uniform.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/select2.css}" />
+<link th:href="@{/assets/font-awesome/css/font-awesome.css}"
+	rel="stylesheet" />
+<link
+	th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,700,800}"
+	rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+	<!--Header-part-->
+	<div id="header">
+		<img src="/images/logo.png" width="185" height="" />
+	</div>
+	<!--close-Header-part-->
+
+	<!--top-Header-menu-->
+	<div id="user-nav" class="navbar navbar-inverse">
+		<ul class="nav">
+			<li class="dropdown" id="profile-messages"><a title="" href="#"
+				data-toggle="dropdown" data-target="#profile-messages"
+				class="dropdown-toggle"><i class="icon icon-user"></i> <span
+					class="text">Welcome User</span><b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a th:href="@{/myprofile}"><i class="icon-user"></i>
+							My Profile</a></li>
+					<li class="divider"></li>
+					<li><a th:href="@{/logout}"><i class="icon-key"></i> Log
+							Out</a></li>
+				</ul></li>
+			<li class=""><a title="" th:href="@{/mysettings}"><i
+					class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+			<li class=""><a title="" th:href="@{/logout}"><i
+					class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+		</ul>
+	</div>
+
+
+	<!--sidebar-menu-->
+
+	<div id="sidebar">
+		<a href="#" class="visible-phone"><i class="icon icon-home"></i>
+			Dashboard2</a>
+		<ul>
+			<li class="submenu"><a href="#"><i class="icon icon-th-list"></i>
+					<span>Bookings Management System</span></a>
+				<ul>
+					<li><a th:href="@{/add_new_journey_in_system/1}">Add New
+							Tickets to System</a></li>
+					<li><a th:href="@{/available_journeys_in_system/2}">View
+							Available Tickets</a></li>
+					<li><a th:href="@{/add_manage_journey_booking/3}">Manage
+							Ticket Booking</a></li>
+					<li><a th:href="@{/add_journey_payment_in_system/4}">Make
+							Ticket Payment</a></li>
+					<li><a th:href="@{/generate_journeys_report/5}">Generate
+							System Report</a></li>
+
+				</ul></li>
+		</ul>
+	</div>
+
+	<div id="content">
+
+		<div class="widget-content" id="same-line-div">
+			<p>
+			<h2>Generate Report</h2>
+			</p>
+		</div>
+
+		<div class="container-fluid">
+
+			<table class="table table-bordered data-table">
+				<thead>
+					<tr>
+						<th>1</th>
+						<th>2</th>
+						<th>3</th>
+						<th>4</th>
+						<th>5</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Journeys</td>
+						<td th:text="${data.ticketId}">Talha</td>
+						<td>Reservations</td>
+						<td th:text="${data.destination}">CS101</td>
+						<td>Payments</td>
+						<td th:text="${data.id}">CS101</td>
+						<td th:text="${data.ticketPrice}">CS101</td>
+						<td class="center"><a th:href="@{/download_journeys_report}"
+							class="btn btn-primary btn-mini">Generate Report</a>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+	<script th:src="@{/assets/js/jquery.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.ui.custom.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.uniform.js}"></script>
+	<script th:src="@{/assets/js/jquery.validate.js}"></script>
+	<script th:src="@{/assets/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/assets/js/matrix.js}"></script>
+	<script th:src="@{/assets/js/matrix.form_common.js}"></script>
+	<script th:src="@{/assets/js/matrix.tables.js}"></script>
+
+</body>
+</html>

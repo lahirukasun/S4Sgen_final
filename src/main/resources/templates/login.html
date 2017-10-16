@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Login</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" th:href="@{/assets/css/main.css}" />
+	</head>
+	<body>
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					<header class="align-left">
+						<h1>S4Sgen</h1>
+					</header>
+					<header class="align-center">
+						<h3>Login Form</h3>
+					</header>
+					<div>
+						<form method="post" th:action="@{/login}" id="login-form">
+							<div class="row uniform">
+								<div class="12u$">
+									<input type="text" name="login" id="login" placeholder="User Name" />
+								</div>
+								<div class="12u$">
+									<input type="password" name="password" id="password" placeholder="Password" />
+								</div>
+								<br/>
+								<div class="6u 12u$(xsmall)">
+								</div>
+								<div class="6u$ 12u$(xsmall)">
+									<input type="submit" value="Login" class="fit"/>
+								</div>
+								<div class="12u$" th:if="${param.error}">
+									<p style="color: #FF1C19;">User Name or Password invalid, please verify</p>
+								</div>
+							</div>
+						</form>					
+					</div>
+				</div>
+			</section>
+
+		<!-- Scripts -->
+			<script th:src="@{/assets/js/jquery.min.js}"></script>
+			<script th:src="@{/assets/js/jquery.scrolly.min.js}"></script>
+			<script th:src="@{/assets/js/jquery.scrollex.min.js}"></script>
+
+	</body>
+</html>

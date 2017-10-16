@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Management System Users</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}" />
+<link rel="stylesheet"
+	th:href="@{/assets/css/bootstrap-responsive.min.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/matrix-style.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/matrix-media.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/datepicker.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/uniform.css}" />
+<link rel="stylesheet" th:href="@{/assets/css/select2.css}" />
+<link th:href="@{/assets/font-awesome/css/font-awesome.css}"
+	rel="stylesheet" />
+<link
+	th:href="@{http://fonts.googleapis.com/css?family=Open+Sans:400,700,800}"
+	rel='stylesheet' type='text/css' />
+</head>
+<body>
+
+	<!--Header-part-->
+	<div id="header">
+		<img src="/images/logo.png" width="185" height="" />
+	</div>
+	<!--close-Header-part-->
+
+	<!--top-Header-menu-->
+	<div id="user-nav" class="navbar navbar-inverse">
+		<ul class="nav">
+			<li class="dropdown" id="profile-messages"><a title="" href="#"
+				data-toggle="dropdown" data-target="#profile-messages"
+				class="dropdown-toggle"><i class="icon icon-user"></i> <span
+					class="text">Welcome User</span><b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a th:href="@{/myprofile}"><i class="icon-user"></i>
+							My Profile</a></li>
+					<li class="divider"></li>
+					<li><a th:href="@{/logout}"><i class="icon-key"></i> Log
+							Out</a></li>
+				</ul></li>
+			<li class=""><a title="" th:href="@{/mysettings}"><i
+					class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+			<li class=""><a title="" th:href="@{/logout}"><i
+					class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+		</ul>
+	</div>
+
+
+	<!--sidebar-menu-->
+
+	<div id="sidebar">
+		<a href="#" class="visible-phone"><i class="icon icon-home"></i>
+			Dashboard2</a>
+	</div>
+
+	<div id="content">
+
+		<div class="widget-content" id="same-line-div">
+			<p>
+				<h2>Registered User</h2>
+			</p>
+		</div>
+
+		<div class="container-fluid">
+
+			<table class="table table-bordered data-table">
+				<thead>
+					<tr>
+						<th>User Id</th>
+						<th>User Name</th>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Create Date</th>
+						<th>Management System</th>
+						<th>Sub Management System</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="u : ${users}">
+						<td th:text="${u.id}">1234</td>
+						<td th:text="${u.login}">Talha</td>
+						<td th:text="@{${u.firstName} + '  ' + ${u.lastName}}">313741922</td>
+						<td th:text="${u.email}">CS101</td>
+						<td th:text="${u.createDate}">CS101</td>
+						<td th:text="${u.manaementSystem.id}">CS101</td>
+						<td th:text="${u.subManagementSystem.id}">02-02-2017</td>
+						<td th:if="${u.active==true}"><input type="button" class="btn btn-danger btn-mini" value="Deactivate" th:id="${u.id}" th:onClick="'javascript:updateUser(\'' + ${u.id} + '\' ,this);'"/></td>
+						<td th:if="${u.active==false}"><input type="button" class="btn btn-primary btn-mini" value="Activate" th:id="${u.id}" th:onClick="'javascript:updateUser(\'' + ${u.id} + '\' ,this);'"/></td>
+						<td><a th:href="@{'/user_detail/' + ${u.id}}" class="btn btn-primary btn-mini">View Details</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+	<script th:src="@{/assets/js/jquery.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.ui.custom.js}"></script>
+	<script th:src="@{/assets/js/bootstrap.min.js}"></script>
+	<script th:src="@{/assets/js/jquery.uniform.js}"></script>
+	<script th:src="@{/assets/js/jquery.validate.js}"></script>
+	<script th:src="@{/assets/js/jquery.dataTables.min.js}"></script>
+	<script th:src="@{/assets/js/matrix.js}"></script>
+	<script th:src="@{/assets/js/matrix.form_common.js}"></script>
+	<script th:src="@{/assets/js/matrix.tables.js}"></script>
+<script type="text/javascript">
+function updateUser(id,button) {
+
+	console.log("Button : " + button)
+    console.log("function called ... ");
+    var context = /*[[@{/}]]*/
+    console.log("context is: " + context);
+    $.ajax({
+        type: "GET",
+        url: "update_user_status/" + id,
+        dataType: 'json',
+        cache: false,
+        timeout: 1000,
+        success: function (data) {
+            console.log("SUCCESS : ", data);
+            if($('#' + id).attr('value')==="Activate"){
+            	$('#' + id).removeClass("btn-primary");
+                $('#' + id).addClass("btn-danger");
+                $('#' + id).attr('value' , "Deactivate");
+            }
+            else if($('#' + id).attr('value')==="Deactivate"){
+            	$('#' + id).removeClass("btn-danger");
+                $('#' + id).addClass("btn-primary");
+                $('#' + id).attr('value' , "Activate");
+            }
+            	
+            console.log("Button : " + button);
+        },
+        error: function (e) {
+            console.log("ERROR : ", e);
+        }
+    });
+
+}
+</script>
+</body>
+</html>

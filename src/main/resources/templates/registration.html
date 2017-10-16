@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Registration</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" th:href="@{/assets/css/main.css}" />
+	</head>
+	<body>
+		<!-- Banner -->
+			<section id="banner">
+				<div class="inner">
+					<header class="align-left">
+						<h1>S4Sgen</h1>
+					</header>
+					<header class="align-center">
+						<h3>Registration Form</h3>
+					</header>
+					<div>
+						<form method="post" th:action="@{/register_user}" th:object="${user}" id="reg-form">
+							<div class="row uniform">
+								<div class="6u 12u$(xsmall)">
+									<input type="text" name="firstName" id="firstName" th:field="*{firstName}" placeholder="First Name" />
+								</div>
+								<div class="6u$ 12u$(xsmall)">
+									<input type="text" name="lastName" id="lastName" th:field="*{lastName}" placeholder="Last Name" />
+								</div>
+								<div class="12u$">
+									<input type="email" name="email" id="email" th:field="*{email}" placeholder="Email" />
+								</div>
+								<div class="12u$">
+									<input type="text" name="userName" id="userName" th:field="*{login}" placeholder="User Name" />
+								</div>
+								<div class="12u$">
+									<input type="password" name="password" id="password" th:field="*{password}" placeholder="Password" />
+								</div>
+								<br/>
+								<div class="6u 12u$(xsmall)">
+								</div>
+								<div class="6u$ 12u$(xsmall)">
+									<input type="submit" value="Register" class="fit"/>
+								</div>
+							</div>
+						</form>
+						<div class="12u$" th:if="${param.exists}">
+							<p style="color: #FF1C19;">User Name already Exists</p>
+						</div>					
+					</div>
+				</div>
+			</section>
+
+		<!-- Scripts -->
+			<script th:src="@{/assets/js/jquery.min.js}"></script>
+			<script th:src="@{/assets/js/jquery.scrolly.min.js}"></script>
+			<script th:src="@{/assets/js/jquery.scrollex.min.js}"></script>
+
+	</body>
+</html>
